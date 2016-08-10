@@ -1,0 +1,10 @@
+@value btns: './component/btns.css';
+
+
+.main{
+    color: rgba(0, 0, 0, 0.8);
+}
+.btn{
+    composes: btn from btns;
+    display: block;
+}
