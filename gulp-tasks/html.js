@@ -13,6 +13,6 @@ gulp.task('html:include', function () {
             prefix: '@@',
             basepath: '@file'
         }))
-        .pipe(gulp.dest(static_tmp + '/html'))
+        .pipe(gulp.dest(static_build + '/html'))
 })
 

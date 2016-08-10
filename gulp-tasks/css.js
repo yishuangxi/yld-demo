@@ -21,7 +21,7 @@ gulp.task('css:modules:json', function () {
             getJSON: function (cssFileName, json) {
                 var cssName = path.basename(cssFileName, '.css');
 
-                var jsonFileName = path.resolve(static_tmp + '/json/', cssName + '.json');
+                var jsonFileName = path.resolve(static_build + '/json/', cssName + '.json');
                 fs.writeFileSync(jsonFileName, JSON.stringify(json));
             }
         })
@@ -34,11 +34,11 @@ gulp.task('css:modules:json', function () {
 
 
 gulp.task('css:modules', ['css:modules:json'], function(){
-    var htmlList = fs.readdirSync(static_tmp + '/html')
+    var htmlList = fs.readdirSync(static_build + '/html')
     for (var i = 0; i < htmlList.length; i++) {
         var filename = htmlList[i]
-        gulp.src(static_tmp + '/html/' + filename)
-            .pipe(gulp_posthtml([posthtml_css_modules(static_tmp + '/json/' + filename.split('.')[0] + '.json')]))
+        gulp.src(static_build + '/html/' + filename)
+            .pipe(gulp_posthtml([posthtml_css_modules(static_build + '/json/' + filename.split('.')[0] + '.json')]))
             .pipe(gulp.dest(static_build + '/html'));
     }
 })
