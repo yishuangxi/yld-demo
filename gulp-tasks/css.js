@@ -39,6 +39,9 @@ gulp.task('css:modules', ['css:modules:json'], function(){
         var filename = htmlList[i]
         gulp.src(static_build + '/html/' + filename)
             .pipe(gulp_posthtml([posthtml_css_modules(static_build + '/json/' + filename.split('.')[0] + '.json')]))
+            .on('error', function(err){
+                console.error(err)
+            })
             .pipe(gulp.dest(static_build + '/html'));
     }
 })
