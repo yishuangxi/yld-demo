@@ -8,3 +8,8 @@
     composes: btn from btns;
     display: block;
 }
+
+.banner{
+    display: block;
+    width: 100%;
+}

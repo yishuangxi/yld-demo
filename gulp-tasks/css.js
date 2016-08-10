@@ -4,6 +4,9 @@
 
 var path = require('path')
 var fs = require('fs')
+var static_src = 'static-src'
+var static_build = 'static-build'
+var static_tmp = 'static-tmp'
 
 var gulp = require('gulp')
 var postcss = require('gulp-postcss')
@@ -18,24 +21,24 @@ gulp.task('css:modules:json', function () {
             getJSON: function (cssFileName, json) {
                 var cssName = path.basename(cssFileName, '.css');
 
-                var jsonFileName = path.resolve('static-build/json/', cssName + '.json');
+                var jsonFileName = path.resolve(static_tmp + '/json/', cssName + '.json');
                 fs.writeFileSync(jsonFileName, JSON.stringify(json));
             }
         })
     ]
 
-    return gulp.src('static-src/css/*.css')
+    return gulp.src(static_src + '/css/*.css')
         .pipe(postcss(processors))
-        .pipe(gulp.dest('static-build/css'))
+        .pipe(gulp.dest(static_build + '/css'))
 })
 
 
 gulp.task('css:modules', ['css:modules:json'], function(){
-    var htmlList = fs.readdirSync('static-build/html')
+    var htmlList = fs.readdirSync(static_tmp + '/html')
     for (var i = 0; i < htmlList.length; i++) {
         var filename = htmlList[i]
-        gulp.src('static-build/html/' + filename)
-            .pipe(gulp_posthtml([posthtml_css_modules('./static-build/json/' + filename.split('.')[0] + '.json')]))
-            .pipe(gulp.dest('static-build/html'));
+        gulp.src(static_tmp + '/html/' + filename)
+            .pipe(gulp_posthtml([posthtml_css_modules(static_tmp + '/json/' + filename.split('.')[0] + '.json')]))
+            .pipe(gulp.dest(static_build + '/html'));
     }
 })

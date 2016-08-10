@@ -10,7 +10,7 @@ require('require-dir')('./gulp-tasks')
 
 
 gulp.task('clean', function(){
-    gulp.src(['static-build/html', 'static-build/js', 'static-build/css', 'static-build/image', 'static-build/json/*.json'], {read: false})
+    gulp.src(['static-tmp/html','static-tmp/css','static-tmp/js','static-tmp/json/*.json','static-build/html', 'static-build/js', 'static-build/css', 'static-build/image', 'static-build/json/*.json'], {read: false})
         .pipe(gulp_clean())
 });
 
