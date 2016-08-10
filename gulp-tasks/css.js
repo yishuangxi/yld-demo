@@ -31,10 +31,10 @@ gulp.task('css:modules:json', function () {
 
 
 gulp.task('css:modules', ['css:modules:json'], function(){
-    var htmlList = fs.readdirSync('static-src/html')
+    var htmlList = fs.readdirSync('static-build/html')
     for (var i = 0; i < htmlList.length; i++) {
         var filename = htmlList[i]
-        gulp.src('static-src/html/' + filename)
+        gulp.src('static-build/html/' + filename)
             .pipe(gulp_posthtml([posthtml_css_modules('./static-build/json/' + filename.split('.')[0] + '.json')]))
             .pipe(gulp.dest('static-build/html'));
     }
