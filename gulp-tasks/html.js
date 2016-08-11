@@ -7,7 +7,7 @@ var postcss = require('gulp-postcss')
 var gulp_file_include = require('gulp-file-include')
 
 var static_src = 'static-src'
-var static_build = 'static-build'
+var static_build = 'static'
 var static_tmp = 'static-tmp'
 var static_build_html = path.resolve(static_build, 'html')
 var static_build_css = path.resolve(static_build, 'css')

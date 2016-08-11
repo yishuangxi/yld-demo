@@ -5,7 +5,12 @@
 var path = require('path')
 var fs = require('fs')
 var static_src = 'static-src'
-var static_build = 'static-build'
+var static_src_html = path.resolve(static_src, 'html')
+var static_src_css = path.resolve(static_src, 'css')
+var static_src_js = path.resolve(static_src, 'js')
+var static_src_image = path.resolve(static_src, 'image')
+var static_src_css = path.resolve(static_src, 'css')
+var static_build = 'static'
 var static_tmp = 'static-tmp'
 var static_build_html = path.resolve(static_build, 'html')
 var static_build_css = path.resolve(static_build, 'css')
@@ -18,6 +23,8 @@ var postcss = require('gulp-postcss')
 var gulp_posthtml = require('gulp-posthtml')
 var gulp_uncss = require('gulp-uncss')
 var gulp_md5_plus = require('gulp-md5-plus')
+var gulp_concat = require('gulp-concat')
+
 var postcss_modules = require('postcss-modules')
 var posthtml_css_modules = require('posthtml-css-modules')
 var autoprefixer = require('autoprefixer')
@@ -35,6 +42,14 @@ gulp.task('css:modules', ['css:modules:json'], function () {
             })
             .pipe(gulp.dest(static_build_html));
     }
+})
+
+gulp.task('css:global', function(){
+    var processors = [autoprefixer()]
+    return gulp.src(path.resolve(static_src_css, 'common/*.css'))
+        .pipe(postcss(processors))
+        .pipe(gulp_concat('common.css'))
+        .pipe(gulp.dest(path.resolve(static_build_css, 'common')))
 })
 
 gulp.task('css:uncss', function () {
