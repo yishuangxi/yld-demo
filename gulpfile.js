@@ -5,12 +5,17 @@
 var gulp = require('gulp')
 var gulp_clean = require('gulp-clean')
 var gulp_sequence = require('gulp-sequence')
-
 require('require-dir')('./gulp-tasks')
 
 
-gulp.task('clean', function(){
-    gulp.src(['static-tmp/html','static-tmp/css','static-tmp/js','static-tmp/json/*.json','static-build/html', 'static-build/js', 'static-build/css', 'static-build/image', 'static-build/json/*.json'], {read: false})
+gulp.task('clean', function () {
+    return gulp.src([
+        'static-build/html',
+        'static-build/js',
+        'static-build/css',
+        'static-build/image',
+        'static-build/json/*.json'
+    ], {read: false})
         .pipe(gulp_clean())
 });
 
@@ -20,5 +25,13 @@ gulp.task('clean', function(){
  * 3,css sprite处理
  * 4,静态资源路径修改成绝对路径、添加hash(css中图片资源和html中js、css、图片加hash)
  */
-gulp.task('default', gulp_sequence( 'html:include', 'css:modules', 'css:uncss', 'js', 'image', 'font'))
+gulp.task('default', gulp_sequence(
+    'clean',
+    'html:include',
+    'css:modules',
+    'css:uncss',
+    'css:optimize',
+    'js',
+    'image',
+    'font'))
 

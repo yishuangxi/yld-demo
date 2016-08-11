@@ -10,7 +10,7 @@
 }
 
 .banner{
-    display: block;
+    display: flex;
     width: 100%;
 }
 
