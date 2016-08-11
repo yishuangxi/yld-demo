@@ -14,5 +14,11 @@ gulp.task('clean', function(){
         .pipe(gulp_clean())
 });
 
-gulp.task('default', gulp_sequence( 'html:include', 'css:modules', 'js', 'image', 'font'))
+/*****
+ * 1,合并html
+ * 2,css模块化处理:加hash
+ * 3,css sprite处理
+ * 4,静态资源路径修改成绝对路径、添加hash(css中图片资源和html中js、css、图片加hash)
+ */
+gulp.task('default', gulp_sequence( 'html:include', 'css:modules', 'css:uncss', 'js', 'image', 'font'))
 
